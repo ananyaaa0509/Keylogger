@@ -3,6 +3,7 @@
 #include "logger.h"
 static FILE *log_file = NULL;
 static unsigned long total_keystrokes=0;
+static unsigned long total_characters=0;
 static unsigned long key_frequency[256]={0};
 static unsigned long space_count = 0;
 static unsigned long enter_count = 0;
@@ -57,6 +58,7 @@ void log_key(KeyEvent event){
     switch(event.type){
         case KEY_NORMAL:
             total_keystrokes++;
+            total_characters++;
             key_frequency[(unsigned char)event.key]++;
             fprintf(log_file, "[%02d-%02d-%02d: %02d/%02d/%04d] %c\n",
                 local_time->tm_hour,
@@ -69,6 +71,7 @@ void log_key(KeyEvent event){
             break;
         case KEY_SPACE:
             total_keystrokes++;
+            total_characters++;
             space_count++;
             fprintf(log_file, "[%02d-%02d-%02d: %02d/%02d/%04d] [SPACE]\n",
                 local_time->tm_hour,
@@ -93,6 +96,7 @@ void log_key(KeyEvent event){
             break;
         case KEY_ENTER:
             total_keystrokes++;
+            total_characters++;
             enter_count++;
             fprintf(log_file, "[%02d-%02d-%02d: %02d/%02d/%04d] [ENTER]\n",
                 local_time->tm_hour,
@@ -174,13 +178,15 @@ void show_top_keys(void){
 void end_session(void) {
     time_t end_time = time(NULL);
     double runtime = difftime(end_time, session_start_time);
+    double WPM=total_characters/5.0*(60.0/runtime);
     
      if (log_file != NULL) {
         fprintf(
             log_file,
-            "--- Session ended: %lu keystrokes, %.0f seconds ---\n\n",
+            "--- Session ended: %lu keystrokes, %.0f seconds, %.2f WPM ---\n\n",
             total_keystrokes,
-            runtime
+            runtime,
+            WPM
         );
         show_top_keys();
         flush_log();
@@ -192,5 +198,6 @@ void end_session(void) {
     printf("\nSession ended.\n");
     printf("Total keystrokes: %lu\n", total_keystrokes);
     printf("Active runtime: %.0f seconds\n", runtime);
+    printf("WPM: %.2f", WPM);
 }
 
