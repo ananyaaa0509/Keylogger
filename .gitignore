@@ -1,0 +1,7 @@
+.vscode/
+*.obj
+*.o
+
+*.exe
+keylogger
+keystrokes.log
