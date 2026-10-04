@@ -179,6 +179,7 @@ void end_session(void) {
     time_t end_time = time(NULL);
     double runtime = difftime(end_time, session_start_time);
     double WPM=total_characters/5.0*(60.0/runtime);
+    double error_rate=backspace_count*100/total_characters;
     
      if (log_file != NULL) {
         fprintf(
@@ -198,6 +199,7 @@ void end_session(void) {
     printf("\nSession ended.\n");
     printf("Total keystrokes: %lu\n", total_keystrokes);
     printf("Active runtime: %.0f seconds\n", runtime);
+    printf("error rate: %.2f %\n", error_rate);
     printf("WPM: %.2f", WPM);
 }
 
