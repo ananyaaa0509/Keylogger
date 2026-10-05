@@ -16,16 +16,23 @@ Timestamped keystroke logging
 Human-readable representation of special keys:
 
 [SPACE]
+
 [ENTER]
+
 [BACKSPACE]
+
 [SHIFT]
 
 Escape key support for clean session termination
 
 Typing-session statistics:
+
   Total keystrokes
+  
   Active runtime
+  
   Average Words Per Minute (WPM)
+  
   Backspace error rate
 
 Top 5 most frequently pressed keys
@@ -67,22 +74,34 @@ Controls the overall application lifecycle.
 
 It:
 Initializes the logging session
+
 Starts keyboard event monitoring
+
 Handles session termination
+
 Calculates or triggers session processing
+
 Performs log encryption after the session ends
 
 ###logger.c / logger.h
 Responsible for session logging and typing analysis.
 
 Functions include:
+
 Session initialization
+
 Timestamped keystroke logging
+
 Keystroke frequency tracking
+
 WPM calculation
+
 Backspace error-rate calculation
+
 Top-key analysis
+
 Buffer flushing
+
 Session cleanup
 
 ### input.c / input.h
@@ -94,7 +113,9 @@ platform/
 Contains operating-system-specific implementations for receiving keyboard events.
 
 input_windows.c  → Windows
+
 input_linux.c    → Linux
+
 input_macos.c    → macOS
 
 The platform abstraction allows the rest of the application to use a common input interface.
@@ -156,10 +177,15 @@ Compile the common source files together with the Windows-specific implementatio
 Example source files:
 
 mainn.c
+
 logger.c
+
 input.c
+
 cipher.c
+
 platform/input_platform.c
+
 platform/input_windows.c
 
 ### Linux
@@ -184,26 +210,40 @@ Compilation must be performed on macOS with the appropriate system frameworks an
 
 ## Usage
 Build the project for the target operating system.
+
 Start the program in an authorized testing environment.
+
 The program begins receiving keyboard events.
+
 Keyboard events are processed and recorded with timestamps.
+
 Special keys are represented using readable labels such as [SPACE], [ENTER], and [BACKSPACE].
+
 Use normal test input to generate keyboard events.
+
 Press Escape to terminate the monitoring session.
+
 The program closes the logging session and calculates typing statistics.
+
 The diagnostic log is encrypted after the session ends.
+
 The plaintext log is removed after successful encryption.
 
 ## Safe Testing
 For testing:
+
 Use only your own keyboard input.
+
 Do not enter passwords or authentication credentials while the program is running.
+
 Do not monitor another person's keyboard activity without explicit authorization.
 
 ## Platform Testing
 
 Windows: Tested
+
 Linux: Testing in an Ubuntu virtual machine
+
 macOS: Implementation included; not tested on macOS hardware
 
 ## Security and Ethical Scope
@@ -218,7 +258,9 @@ Users are responsible for ensuring that their use of the software complies with 
 The following files may be generated during execution:
 
 keystrokes.log
+
 enc_keystrokes.log
+
 decrypted.log
 
 These files may contain sensitive keyboard input and are therefore excluded from version control using .gitignore.
@@ -228,22 +270,35 @@ Generated logs should never be committed to the repository.
 ## Technologies
 C
 Linux input-event interface
+
 Windows low-level keyboard hooks
+
 macOS Quartz/Application Services event taps
+
 Standard C libraries
+
 Custom XOR file encryption
+
 Platform-specific C APIs
 
 ## Learning Objectives
 This project was developed to explore:
+
 Low-level keyboard event handling
+
 Cross-platform system programming in C
 Modular C project architecture
+
 Header/source-file organization
+
 File I/O and buffered logging
+
 Runtime statistics and data analysis
+
 Basic encryption concepts
+
 Platform abstraction
+
 Secure and ethical cybersecurity development
 
 ## Disclaimer
