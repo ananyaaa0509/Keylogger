@@ -1,4 +1,4 @@
-# keylogger — C Cybersecurity Project
+# Keylogger
 ## Overview
 Keylogger is a C-based cybersecurity and typing-analysis project developed as part of a cybersecurity course.
 
