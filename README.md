@@ -203,7 +203,7 @@ Do not monitor another person's keyboard activity without explicit authorization
 ## Platform Testing
 
 Windows: Tested
-Linux: Tested in an Ubuntu virtual machine
+Linux: Testing in an Ubuntu virtual machine
 macOS: Implementation included; not tested on macOS hardware
 
 ## Security and Ethical Scope
