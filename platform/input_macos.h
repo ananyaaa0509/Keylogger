@@ -1,5 +1,5 @@
 #ifndef INPUT_MACOS_H
 #define INPUT_MACOS_H
 #include "../input.h"
-KeyEvent macos_get_event(void);
+InputResult macos_start_platform_input(void);
 #endif

@@ -199,7 +199,7 @@ void end_session(void) {
     printf("\nSession ended.\n");
     printf("Total keystrokes: %lu\n", total_keystrokes);
     printf("Active runtime: %.0f seconds\n", runtime);
-    printf("error rate: %.2f %\n", error_rate);
-    printf("WPM: %.2f", WPM);
+    printf("error rate percentage: %.2f \n", error_rate);
+    printf("WPM: %.2f\n", WPM);
 }
 

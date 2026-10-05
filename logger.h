@@ -20,6 +20,7 @@ typedef struct{
 
 void log_key(KeyEvent event);
 int start_session(void);
+void show_top_keys(void);
 void end_session(void);
 void flush_log(void);
 #endif

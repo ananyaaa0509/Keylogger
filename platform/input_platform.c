@@ -10,14 +10,14 @@
 
 
 
-KeyEvent get_event(void)
+InputResult start_platform_input(void)
 {
 #ifdef _WIN32
-  return windows_get_event();
+  return windows_start_platform_input();
 #elif defined(__linux__)
-  return linux_get_event();
+  return linux_start_platform_input();
 #elif defined(__APPLE__)
-  return macos_get_event();
+  return macos_start_platform_input();
 #else
   return create_event(KEY_ESCAPE, 0, 0, 0, 0);
 #endif

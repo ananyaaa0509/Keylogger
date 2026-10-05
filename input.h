@@ -3,7 +3,8 @@
 #include "logger.h"
 typedef enum{
     INPUT_RUNNING,
-    INPUT_EXIT_REQUESTED
+    INPUT_EXIT_REQUESTED,
+    INPUT_ERROR
 } InputResult;
 KeyEvent create_event(KeyType type, char key, int ctrl, int shift, int alt);
 void process_event(KeyEvent event);
