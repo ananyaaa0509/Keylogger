@@ -5,3 +5,5 @@
 *.exe
 keylogger
 keystrokes.log
+enc_keystrokes.log
+decrypted.log
