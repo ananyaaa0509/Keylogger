@@ -1,5 +1,5 @@
-keylogger — C Cybersecurity Project
-Overview
+# keylogger — C Cybersecurity Project
+## Overview
 Keylogger is a C-based cybersecurity and typing-analysis project developed as part of a cybersecurity course.
 
 The project demonstrates how keyboard events can be received through operating-system-specific interfaces, processed into readable key events, recorded with timestamps, analyzed for typing statistics, and encrypted using a custom XOR-based cipher.
@@ -8,7 +8,7 @@ The project is intended strictly for educational purposes, authorized security t
 
 Ethical Use Notice: This software should only be executed on systems and with keyboard input for which the tester has explicit authorization. Do not use it to monitor another person's activity or capture passwords, credentials, or other sensitive information.
 
-Features
+## Features
 Local background keyboard event monitoring
 
 Timestamped keystroke logging
@@ -16,30 +16,23 @@ Timestamped keystroke logging
 Human-readable representation of special keys:
 
 [SPACE]
-
 [ENTER]
-
 [BACKSPACE]
-
 [SHIFT]
 
 Escape key support for clean session termination
 
 Typing-session statistics:
-
-Total keystrokes
-
-Active runtime
-
-Average Words Per Minute (WPM)
-
-Backspace error rate
+  Total keystrokes
+  Active runtime
+  Average Words Per Minute (WPM)
+  Backspace error rate
 
 Top 5 most frequently pressed keys
 
 Custom XOR-based file encryption
 
-Platform-specific keyboard input implementations for:
+###Platform-specific keyboard input implementations for:
 
 Windows
 
@@ -47,9 +40,9 @@ Linux
 
 macOS
 
-Generated diagnostic files excluded from version control
+## Generated diagnostic files excluded from version control
 
-Project Structure
+## Project Structure
 .
 ├── mainn.c
 ├── input.c
@@ -68,44 +61,31 @@ Project Structure
     ├── input_macos.c
     └── input_macos.h
 
-Components
-mainn.c
+## Components
+### mainn.c
 Controls the overall application lifecycle.
 
 It:
-
 Initializes the logging session
-
 Starts keyboard event monitoring
-
 Handles session termination
-
 Calculates or triggers session processing
-
 Performs log encryption after the session ends
 
-logger.c / logger.h
+###logger.c / logger.h
 Responsible for session logging and typing analysis.
 
 Functions include:
-
 Session initialization
-
 Timestamped keystroke logging
-
 Keystroke frequency tracking
-
 WPM calculation
-
 Backspace error-rate calculation
-
 Top-key analysis
-
 Buffer flushing
-
 Session cleanup
 
-input.c / input.h
+### input.c / input.h
 Provides the common input-processing layer shared by the platform-specific implementations.
 
 It defines the common KeyEvent representation and provides a consistent interface for processing keyboard events.
@@ -119,12 +99,12 @@ input_macos.c    → macOS
 
 The platform abstraction allows the rest of the application to use a common input interface.
 
-cipher.c / cipher.h
+###cipher.c / cipher.h
 Implements the project's custom XOR-based encryption mechanism for the diagnostic log.
 
 The encryption logic is implemented directly in C for educational purposes.
 
-Typing Statistics
+### Typing Statistics
 The program calculates several metrics at the end of a typing session.
 
 Words Per Minute
@@ -134,17 +114,17 @@ WPM = (characters / 5) / minutes
 
 The calculation uses the number of characters recorded during the active session.
 
-Backspace Error Rate
+### Backspace Error Rate
 The project estimates the typing error rate using the number of backspace events:
 
 Error Rate = (backspaces / characters) × 100
 
 This provides an approximate measure of corrections made during the session.
 
-Top Keys
+### Top Keys
 The program maintains frequency counters for keyboard events and displays the five most frequently pressed keys at the end of the session.
 
-Encryption
+## Encryption
 After a session ends, the diagnostic log is encrypted using the project's XOR-based encryption implementation.
 
 The workflow is:
@@ -161,16 +141,28 @@ XOR Encryption
       ↓
 Encrypted Log
 
-The generated encrypted file is:
-
-enc_keystrokes.log
+The generated encrypted file is: enc_keystrokes.log
 
 The original plaintext log is removed after successful encryption.
 
 Security Note: XOR encryption with a static key is implemented for educational purposes only. It is not considered secure modern cryptography and should not be used to protect sensitive information in real-world applications.
 
-Building
-Linux
+## Building
+### Windows
+The Windows implementation uses the Windows low-level keyboard hook API.
+
+Compile the common source files together with the Windows-specific implementation using a suitable C compiler such as MinGW or Visual Studio.
+
+Example source files:
+
+mainn.c
+logger.c
+input.c
+cipher.c
+platform/input_platform.c
+platform/input_windows.c
+
+### Linux
 The Linux implementation uses the Linux input-event interface.
 
 Compile with:
@@ -185,81 +177,36 @@ sudo ./keylogger
 
 Access to /dev/input devices may require elevated permissions depending on the system configuration.
 
-Windows
-The Windows implementation uses the Windows low-level keyboard hook API.
-
-Compile the common source files together with the Windows-specific implementation using a suitable C compiler such as MinGW or Visual Studio.
-
-Example source files:
-
-mainn.c
-logger.c
-input.c
-cipher.c
-platform/input_platform.c
-platform/input_windows.c
-
-macOS
+### macOS
 The macOS implementation uses the macOS Quartz/Application Services event-tap API.
 
 Compilation must be performed on macOS with the appropriate system frameworks and permissions.
 
-Usage
+## Usage
 Build the project for the target operating system.
-
 Start the program in an authorized testing environment.
-
 The program begins receiving keyboard events.
-
 Keyboard events are processed and recorded with timestamps.
-
 Special keys are represented using readable labels such as [SPACE], [ENTER], and [BACKSPACE].
-
 Use normal test input to generate keyboard events.
-
 Press Escape to terminate the monitoring session.
-
 The program closes the logging session and calculates typing statistics.
-
 The diagnostic log is encrypted after the session ends.
-
 The plaintext log is removed after successful encryption.
 
-Safe Testing
+## Safe Testing
 For testing:
-
 Use only your own keyboard input.
-
 Do not enter passwords or authentication credentials while the program is running.
-
 Do not monitor another person's keyboard activity without explicit authorization.
 
-Use an isolated virtual machine or dedicated test environment when appropriate.
-
-Platform Testing
+## Platform Testing
 
 Windows: Tested
 Linux: Tested in an Ubuntu virtual machine
 macOS: Implementation included; not tested on macOS hardware
 
-Security and Ethical Scope
-This project demonstrates concepts related to:
-
-Operating-system input interfaces
-
-Event processing
-
-System-level programming
-
-Logging
-
-Data analysis
-
-File encryption
-
-Cross-platform C development
-
-Cybersecurity ethics
+## Security and Ethical Scope
 
 Keyboard-monitoring software can potentially capture highly sensitive information. Therefore, this project is intended only for educational use, authorized security testing, and local input diagnostics.
 
@@ -267,7 +214,7 @@ The developer does not intend for the software to be used for unauthorized surve
 
 Users are responsible for ensuring that their use of the software complies with applicable laws, institutional policies, and authorization requirements.
 
-Generated Files
+## Generated Files
 The following files may be generated during execution:
 
 keystrokes.log
@@ -278,62 +225,26 @@ These files may contain sensitive keyboard input and are therefore excluded from
 
 Generated logs should never be committed to the repository.
 
-Limitations
-This project is primarily an educational demonstration and has several limitations:
-
-The XOR encryption mechanism is not suitable for production security.
-
-Platform implementations depend on operating-system APIs.
-
-Keyboard-event access may require elevated permissions.
-
-macOS may require additional system permissions for event monitoring.
-
-The project has not been fully tested across every supported operating-system version.
-
-Typing statistics are approximate and intended for educational analysis.
-
-The project is not designed as a production-grade monitoring or security product.
-
-Technologies
+## Technologies
 C
-
 Linux input-event interface
-
 Windows low-level keyboard hooks
-
 macOS Quartz/Application Services event taps
-
 Standard C libraries
-
 Custom XOR file encryption
-
 Platform-specific C APIs
 
-Learning Objectives
+## Learning Objectives
 This project was developed to explore:
-
 Low-level keyboard event handling
-
 Cross-platform system programming in C
-
 Modular C project architecture
-
 Header/source-file organization
-
 File I/O and buffered logging
-
 Runtime statistics and data analysis
-
 Basic encryption concepts
-
 Platform abstraction
-
 Secure and ethical cybersecurity development
 
-Disclaimer
-This project is provided for educational and authorized testing purposes only.
-
-Do not use it to monitor systems, accounts, or individuals without explicit permission. Never use it to capture passwords, authentication tokens, financial information, or other sensitive data.
-
-The author is not responsible for misuse of the software.
+## Disclaimer
+This project is provided for educational and authorized testing purposes only. Do not use it to monitor systems, accounts, or individuals without explicit permission. Never use it to capture passwords, authentication tokens, financial information, or other sensitive data.
